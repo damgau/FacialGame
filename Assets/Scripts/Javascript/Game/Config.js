@@ -14,6 +14,7 @@
 
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
+var divScore = document.getElementById('score');
 var ctx = canvas.getContext("2d");
 
 var Scenes = {};

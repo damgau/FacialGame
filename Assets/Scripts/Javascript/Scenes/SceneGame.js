@@ -83,9 +83,10 @@ function SceneGame()
 		if (!Application.GamePaused) 
 		{
 			//Show UI
-			ctx.fillStyle = "black";
+			/*ctx.fillStyle = "black";
 			ctx.font = "15px candara";
-			ctx.fillText("Score : " + this.score,10,canvas.height-20);
+			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
+			score.innerHTML = "Score : " + this.score;
 		} 
 		else 
 		{
