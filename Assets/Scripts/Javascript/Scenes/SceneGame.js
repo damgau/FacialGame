@@ -23,6 +23,7 @@ function SceneGame()
 	this.started = false;
 
 	this.score = 0;
+	this.pop = false;
 
 	this.WorldSize = new Vector(4096,4096);
 
@@ -68,6 +69,14 @@ function SceneGame()
 	{
 		if (!Application.GamePaused) 
 		{
+			if (this.score && this.score % 10 == 0) 
+			{
+				if (this.pop) 
+				{
+					this.GameObjects.push(new Ball());
+					this.pop = false;
+				}
+			}
 			for (var i = 0; i < this.GameObjects.length; i++) 
 			{
 				this.GameObjects[i].Start();
@@ -75,6 +84,14 @@ function SceneGame()
 			for (var i = 0; i < this.Groups.length; i++) 
 			{
 				this.Groups[i].Start();
+			}
+			var el;
+			for (var i = 0; i < this.GameObjects.length; i++) {
+				el = this.GameObjects[i];
+				if(el.name == "Ball" && el.outOfBounds && this.GameObjects.length > 2) {
+					this.GameObjects.splice(i,1);
+					i--;
+				}
 			}
 		}
 		if (Application.debugMode) 
@@ -95,7 +112,6 @@ function SceneGame()
 			ctx.font = "15px candara";
 			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
 
-			console.log(Scenes['Loader'].highScore);
 			if(this.score > Scenes['Loader'].highScore){
 				Scenes['Loader'].highScore = this.score;
 			}
