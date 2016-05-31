@@ -322,7 +322,15 @@ function Tracker()
 		if (!this.started) {
 			// operation start
 
+
+
+
+
+
+
+
 			var box = new Box();
+			var scaleFactor = 4;
 			this.tracker.setInitialScale(3);
 		    this.tracker.setStepSize(1);
 		    this.tracker.setEdgesDensity(0.2);
@@ -331,14 +339,14 @@ function Tracker()
 			this.tracker.on('track', function(event) {
 		     	ctx.clearRect(0, 0, canvas.width, canvas.height);
 		     	event.data.forEach(function(rect) {
-			        ctx.strokeStyle = '#a64ceb';
-			        ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+			        //ctx.strokeStyle = '#a64ceb';
+			        //ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
 
 			        if(rect != undefined){
-			        	box.x = rect.x;
-				        box.y = rect.y;
-				        box.w = rect.width;
-				        box.h = rect.height;  	
+			        	box.x = rect.x*scaleFactor;
+				        box.y = rect.y*scaleFactor;
+				        box.w = rect.width*scaleFactor;
+				        box.h = rect.height*scaleFactor;  	
 			        }
 
 			        that.Transform.RelativePosition.x = box.x;
@@ -348,10 +356,12 @@ function Tracker()
 
 			        that.Physics.Collider = box;
 
-			        ctx.font = '11px Helvetica';
-			        ctx.fillStyle = "#fff";
-			        ctx.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-			        ctx.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+
+
+			        //ctx.font = '11px Helvetica';
+			        //ctx.fillStyle = "#fff";
+			        //ctx.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+			        //ctx.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 		     	});
 		    });
 
@@ -438,6 +448,7 @@ function Tracker()
         		else this.isCollide = false;
         	}
         }
+         ctx.drawImage(video, 0, 0, 320*2, 240*2);
 
 		this.PostUpdate();	
 	};
