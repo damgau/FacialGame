@@ -1,5 +1,5 @@
 /**
- * Create a new Emiiter
+ * Create a new Emitter
  * 
  * @class
  * @param {Vector} _position - The position of the Emitter
@@ -10,7 +10,7 @@
  * 
  * @return {Emitter}
  * */
-function Emitter(_position, _velocity, _spread, _rate, _max) 
+function Emitter(_position, _velocity, _spread, _rate, _max, _color) 
 {
 	this.Parent = null;
 	this.Particules = [];
@@ -19,9 +19,10 @@ function Emitter(_position, _velocity, _spread, _rate, _max)
 	this.Position = _position;
 	this.Velocity = _velocity || new Vector();
 	this.spread = _spread || Math.PI/32; //angles possibles de direction
-	this.color = "white";
+	this.color = _color || "white";
 	this.rate = _rate || 5;
 	this.angleNow = 0;
+	this.emit = true;
 }
 /**
 *
@@ -35,12 +36,16 @@ Emitter.prototype.EmitParticules = function()
 	{
 		if (this.Particules.length < this.particulesMax) 
 		{
-			var angle = this.velocity.GetAngle() + this.spread ;
+			// You can change this values for more fun.
+			var angle = Math.random()*Math.PI*2 ;
 			var position = new Vector(this.Position.x,this.Position.y);
 			var velocity = this.Velocity.FromAngle(angle);
 			this.Particules.push(new Particle(position,velocity,this.color));
 		} 
-		else return;
+		else{
+			this.emit = false;
+			return;	
+		} 
 	}
 };
 /**
@@ -55,7 +60,9 @@ Emitter.prototype.Update = function()
 		this.Position.x = this.RelativePosition.x + this.Parent.Transform.Position.x;
 		this.Position.y = this.RelativePosition.y + this.Parent.Transform.Position.y;
 	}
-	this.EmitParticules();
+	if (this.emit) {
+		this.EmitParticules();	
+	}
 	for (index in this.Particules) 
 	{
 		if (this.Particules[index].outOfBounds) 
@@ -66,7 +73,8 @@ Emitter.prototype.Update = function()
 		else 
 		{
 			this.Particules[index].Update();
-			this.Particules[index].Render();
+			// Call in Particule.Update
+			//this.Particules[index].Render();
 		}
 	}
 };

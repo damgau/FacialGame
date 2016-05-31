@@ -30,7 +30,7 @@ var Application =
 {
 	LoadedScene: null,
 	gamePaused: false,
-	debugMode: true
+	debugMode: false
 };
 
 var imagesLoaded = 0;

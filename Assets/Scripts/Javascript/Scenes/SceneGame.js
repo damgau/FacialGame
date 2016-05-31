@@ -23,7 +23,12 @@ function SceneGame()
 	this.started = false;
 
 	this.score = 0;
+<<<<<<< HEAD
 	this.SoundPlaying = false;
+=======
+	this.pop = false;
+
+>>>>>>> 29936a0a33395ff60e2182dfdddee7a8fb0bb55d
 	this.WorldSize = new Vector(4096,4096);
 
 	/**
@@ -66,6 +71,8 @@ function SceneGame()
 			var ball = new Ball();
 			this.ball = ball;
 			this.GameObjects.push(Scenes["Loader"].track,ball);
+
+			this.Groups.push(new ParticlesSystem(new Vector(0, 0)));
 			this.started = true;
 			Print('System:Scene ' + this.name + " Started !");
 			Time.SetTimeWhenSceneLoaded();
@@ -80,6 +87,7 @@ function SceneGame()
 	{
 		if (!Application.GamePaused) 
 		{
+
 			if(Scenes['Game'].score == Scenes['Loader'].highScore+1 && !this.SoundPlaying){
 				this.SoundPlaying = true;
 				Audios["ola"].volume = 1;
@@ -91,6 +99,15 @@ function SceneGame()
 				this.SoundPlaying = false;
 			}
 
+			if (this.score && this.score % 10 == 0) 
+			{
+				if (this.pop) 
+				{
+					this.GameObjects.push(new Ball());
+					this.pop = false;
+				}
+			}
+
 			for (var i = 0; i < this.GameObjects.length; i++) 
 			{
 				this.GameObjects[i].Start();
@@ -98,6 +115,14 @@ function SceneGame()
 			for (var i = 0; i < this.Groups.length; i++) 
 			{
 				this.Groups[i].Start();
+			}
+			var el;
+			for (var i = 0; i < this.GameObjects.length; i++) {
+				el = this.GameObjects[i];
+				if(el.name == "Ball" && el.outOfBounds && this.GameObjects.length > 2) {
+					this.GameObjects.splice(i,1);
+					i--;
+				}
 			}
 		}
 		if (Application.debugMode) 
@@ -118,7 +143,11 @@ function SceneGame()
 			ctx.font = "15px candara";
 			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
 
-			
+
+			if(this.score > Scenes['Loader'].highScore){
+				Scenes['Loader'].highScore = this.score;
+			}
+
 			divScore.innerHTML = this.score;
 			divHighScore.innerHTML = Scenes['Loader'].highScore;
 		} 

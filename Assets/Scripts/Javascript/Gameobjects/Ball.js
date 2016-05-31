@@ -408,27 +408,32 @@ function Ball()
 	 * */
 	this.Update = function() 
 	{
+		this.Transform.angle += 0.5 * this.velocity.x;
 		this.Transform.RelativePosition.x -= this.velocity.x;
 		this.Transform.RelativePosition.y -= this.velocity.y + this.impulsion;
 		this.Physics.Collider.y = this.Transform.RelativePosition.y + 40;
 		this.Physics.Collider.x = this.Transform.RelativePosition.x + 40;
 		this.Physics.Collider.radius = 25;
 
-
 		if(this.Transform.RelativePosition.y > canvas.height - this.radius)
 		{
-			//this.impulsion = this.impulsionMax;
-			//Application.LoadedScene.score = 0;
-			Audios["ouh"].volume = 1;
-			Audios["ouh"].currentTime = 0;
-			Audios["ouh"].play();
-			//console.log(Scenes['Loader'].highScore);
-			if(Scenes['Game'].score > Scenes['Loader'].highScore){
-				Scenes['Loader'].highScore = Scenes['Game'].score;
-				
+
+			this.outOfBounds = true;
+			if (Application.LoadedScene.GameObjects.length == 2) 
+			{
+				//this.impulsion = this.impulsionMax;
+				//Application.LoadedScene.score = 0;
+				Audios["ouh"].volume = 1;
+				Audios["ouh"].currentTime = 0;
+				Audios["ouh"].play();
+				//console.log(Scenes['Loader'].highScore);
+				if(Scenes['Game'].score > Scenes['Loader'].highScore){
+					Scenes['Loader'].highScore = Scenes['Game'].score;
+					
+				}
+				Scenes["GameOver"] = new SceneGameOver();
+				Application.LoadedScene = Scenes["GameOver"];
 			}
-			Scenes["GameOver"] = new SceneGameOver();
-			Application.LoadedScene = Scenes["GameOver"];
 		}
 
 		if (this.Transform.RelativePosition.x < 0){

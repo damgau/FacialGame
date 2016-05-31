@@ -14,7 +14,7 @@ function Particle(_position, _velocity, _color)
 {
 	this.Position = _position;
 	this.Velocity = _velocity;
-	this.color = _color;
+	this.color = Math.Random.ColorRGBA(.5);
 	this.Acceleration = new Vector();
 	this.outOfBounds = false;
 }
@@ -27,8 +27,8 @@ function Particle(_position, _velocity, _color)
 
 Particle.prototype.Update = function()
 {
-	this.Velocity.Add(this.acceleration);
-	this.Position.Add(this.velocity);
+	this.Velocity.Add(this.Acceleration);
+	this.Position.Add(this.Velocity);
 	this.SubmitToFields();
 
 	if (this.Position.x < 0 || this.Position.x > canvas.width || 
@@ -36,6 +36,7 @@ Particle.prototype.Update = function()
 	{
 		this.outOfBounds = true;
 	}
+	this.Render();
 };
 
 /**
@@ -47,7 +48,7 @@ Particle.prototype.Update = function()
 Particle.prototype.Render = function()
 {
 	ctx.fillStyle = this.color;
-	ctx.fillRect(this.Position.x, this.Position.y, 1, 1);
+	ctx.fillRect(this.Position.x, this.Position.y, 3, 3);
 };
 
 /**
@@ -57,22 +58,15 @@ Particle.prototype.Render = function()
 **/
 Particle.prototype.SubmitToFields = function()
 {
-	var accelerationX = 0;
-	var accelerationY = 0;
-
-	for (var i = 0; i < Application.LoadedScene.GameObjects[0].fields.length; i++) 
-	{
-		var field = Application.LoadedScene.GameObjects[0].fields[i];
+	for (var i = 0; i < Scenes["Game"].Groups[0].Fields.length; i++) {
+		
+		var field = Scenes["Game"].Groups[0].Fields[i];
 		var vector = new Vector();
-			vector.x = field.Position.x - this.Position.x;
-			vector.y = field.Position.y - this.Position.y;
-		var strength = field.mass / Math.pow(vector.LengthSq(),1.5);
+		vector.x = field.Position.x - this.Position.x;
+		vector.y = field.Position.y - this.Position.y;
 
-		accelerationX = vector.x * strength;
-		accelerationY = vector.y * strength;
-
+		var strength = field.mass / vector.LengthSq();
+		//var strength = field.mass / Math.pow(vector.LengthSq(),1.5);
+		this.Acceleration = vector.Multiply(new Vector(strength, strength));
 	}
-
-	this.acceleration.x = accelerationX;
-	this.acceleration.y = accelerationY;
 };

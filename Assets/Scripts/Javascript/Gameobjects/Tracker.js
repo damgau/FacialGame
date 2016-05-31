@@ -429,6 +429,7 @@ function Tracker()
         		if(collision && Application.LoadedScene == Scenes["Game"]){
         			if (this.isCollide == false) {
         				Application.LoadedScene.score ++;
+        				Application.LoadedScene.pop = true;
         				this.isCollide = true;
         			}
         			//this.Transform.RelativePosition.x
