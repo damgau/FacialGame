@@ -421,6 +421,11 @@ function Tracker()
 
         	if(go.name != 'Tracker'){
         		var collision = Physics.CheckCollision(this.Physics.Collider, go.Physics.Collider);
+        		if (collision && go.name == "StaticBall") {
+        			console.log("ball game over touch");
+        			Scenes["Game"] = new SceneGame();
+        			Application.LoadedScene = Scenes["Game"];
+        		}
         		if(collision){
         			if (this.isCollide == false) {
         				Application.LoadedScene.score ++;
@@ -433,6 +438,8 @@ function Tracker()
         	}
         }
          ctx.drawImage(video, 0, 0, 320*2, 240*2);
+
+        // si il y a une collision avec staticBall : switch game, score = 0 + emitterParticule (feu d'artifice) sur game scene
 
 		this.PostUpdate();	
 	};

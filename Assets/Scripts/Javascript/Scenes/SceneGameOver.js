@@ -12,17 +12,15 @@
  * 
  * @return {Scene}
  * */
-function SceneGame() 
+function SceneGameOver() 
 {
-	this.name = "SceneGame";
+	this.name = "SceneGameOver";
 	this.GameObjects =[];
 	this.Groups = [];
 	this.Cameras = [];
 	this.CurrentCamera = null;
 	this.AlphaMask = null;
 	this.started = false;
-
-	this.score = 0;
 
 	this.WorldSize = new Vector(4096,4096);
 
@@ -45,13 +43,10 @@ function SceneGame()
 		{
 			Time.SetTimeWhenSceneBegin();
 			// operation start
+			//var track = new Tracker();
+			var staticBall = new StaticBall();
+			this.GameObjects.push(Scenes["Loader"].track, staticBall);
 
-			// create in Loader
-			// var track = new Tracker();
-
-			var ball = new Ball();
-			this.ball = ball;
-			this.GameObjects.push(Scenes["Loader"].track,ball);
 			this.started = true;
 			Print('System:Scene ' + this.name + " Started !");
 			Time.SetTimeWhenSceneLoaded();
@@ -89,10 +84,6 @@ function SceneGame()
 		if (!Application.GamePaused) 
 		{
 			//Show UI
-			/*ctx.fillStyle = "black";
-			ctx.font = "15px candara";
-			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
-			score.innerHTML = "Score : " + this.score;
 		} 
 		else 
 		{

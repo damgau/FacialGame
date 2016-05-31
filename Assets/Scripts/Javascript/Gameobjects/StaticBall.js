@@ -26,9 +26,9 @@
  *
  *
  * */
-function Ball() 
+function StaticBall() 
 {
-	this.name = "Ball";
+	this.name = "StaticBall";
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
@@ -37,13 +37,6 @@ function Ball()
 	this.MouseOffset = new Vector();
 
 	this.Parent = null;
-
-	this.velocity = {};
-	this.velocity.x = 2;
-	this.velocity.y = Gravity.y;
-
-	this.impulsion = 0;
-	this.impulsionMax = 20;
 
 	this.Transform = {};
 	this.Transform.RelativePosition = new Vector();
@@ -334,7 +327,7 @@ function Ball()
 			this.Renderer.Material.Source = Images["ball"];
 			this.SetSize(this.radius*2,this.radius*2);
 			// operation start
-			this.SetPosition(canvas.width/2,80);
+			this.SetPosition(canvas.width/2, 80);
 			this.SetPivot(0.5,0.5);
 			this.Physics.colliderIsSameSizeAsTransform  = true;
 
@@ -404,32 +397,10 @@ function Ball()
 	 * */
 	this.Update = function() 
 	{
-		this.Transform.RelativePosition.x -= this.velocity.x;
-		//console.log(this.velocity.x);
-		this.Transform.RelativePosition.y -= this.velocity.y + this.impulsion;
-		this.Physics.Collider.y = this.Transform.RelativePosition.y;
-		this.Physics.Collider.x = this.Transform.RelativePosition.x;
-
-
-		if(this.Transform.RelativePosition.y > canvas.height - this.radius)
-		{
-			//this.impulsion = this.impulsionMax;
-			//Application.LoadedScene.score = 0;
-			Application.LoadedScene = Scenes["GameOver"];
-		}
-
-		if (this.Transform.RelativePosition.x < 0){
-			this.velocity.x = -this.velocity.x;
-		}
-		if (this.Transform.RelativePosition.x > canvas.width) this.velocity.x = -this.velocity.x;
-
-		this.impulsion = this.impulsion + (this.velocity.y * Time.deltaTime);
+		
+		Scenes["Game"].score = 0;
 
 		this.Renderer.Draw();
-		// ctx.beginPath();
-		// ctx.strokeStyle = "red";
-		// ctx.arc(this.Transform.RelativePosition.x,this.Transform.RelativePosition.y,this.radius,0,2*Math.PI);
-		// ctx.stroke();
 		this.PostUpdate();	
 	};
 	/**

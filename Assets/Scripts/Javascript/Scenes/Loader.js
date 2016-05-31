@@ -21,6 +21,10 @@ function Loader()
 	this.imageLoaded = 0;
 	this.Logo = new Image();
 	this.Logo.src = "Assets/Graphics/Logos/logo_technobel.png";
+
+	// test 
+	this.track;
+	
 	/**
 	 * Called at the instruction new Scene().
 	 * */
@@ -53,7 +57,9 @@ function Loader()
 			Scenes["ScenePathFinding"]  = new ScenePathFinding();
 			Scenes["SceneSave"]  = new SceneSave();
 			Scenes["SceneIA"]  = new SceneIA();	*/
-			Scenes["Game"]  = new SceneGame();	
+			Scenes["Game"]  = new SceneGame();
+			Scenes["GameOver"] = new SceneGameOver();
+			this.track = new Tracker();
 
 			LoadImages();
 			this.started = true;
