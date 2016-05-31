@@ -11,6 +11,12 @@
 	<script src="Assets/Scripts/Javascript/Tools/Vendor/face.js"></script>
 	<script src="Assets/Scripts/Javascript/Tools/Vendor/dat.gui.min.js"></script>
 	<style>
+	body{
+		background: url('Assets/Graphics/CB.jpg');
+	    /*background-position: center center;*/
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	}
 @font-face {
 font-family: 'display24';
 src: url('Assets/Graphics/Open_24_Display.ttf');
@@ -21,6 +27,10 @@ transform : rotateY(180deg);
 border-radius: 15px;
 border: 1px solid black;
 }
+canvas{
+	border: 5px solid #333;
+}
+
 #score-wrapper {
 font-family: 'display24';
 position: relative;
@@ -77,6 +87,16 @@ font-size: 30px;
 }
 
 
+.border{
+
+}
+#b-right{
+
+}
+#b-left{
+
+}
+
 	</style>
 </head>
 <body>
@@ -95,6 +115,8 @@ font-size: 30px;
 				<span class="score-text" id="score"></span>
 			</div>
 		</div>
+		<div class="border" id="b-right"></div>
+		<div class="border" id="b-left"></div>
 	</center>
 
 	<!-- Tools  -->
