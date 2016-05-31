@@ -23,12 +23,12 @@ function SceneGame()
 	this.started = false;
 
 	this.score = 0;
-<<<<<<< HEAD
+
 	this.SoundPlaying = false;
-=======
+
 	this.pop = false;
 
->>>>>>> 29936a0a33395ff60e2182dfdddee7a8fb0bb55d
+
 	this.WorldSize = new Vector(4096,4096);
 
 	/**
@@ -144,9 +144,7 @@ function SceneGame()
 			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
 
 
-			if(this.score > Scenes['Loader'].highScore){
-				Scenes['Loader'].highScore = this.score;
-			}
+			
 
 			divScore.innerHTML = this.score;
 			divHighScore.innerHTML = Scenes['Loader'].highScore;
