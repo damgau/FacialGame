@@ -49,7 +49,7 @@ function SceneGameOver()
 			staticBall.velocity = new Vector(0, 0);
 			staticBall.impulsion = 0;
 			staticBall.impulsionMax = 0;
-
+			
 			this.GameObjects.push(Scenes["Loader"].track, staticBall);
 
 			this.started = true;

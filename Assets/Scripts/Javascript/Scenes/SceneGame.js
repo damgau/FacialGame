@@ -48,7 +48,20 @@ function SceneGame()
 
 			// create in Loader
 			// var track = new Tracker();
+			for (var i = 0; i < AudioPath.length; i++) 
+			{	
+				var name = AudioPath[i].name
+				var path = "Assets/Audio/" + AudioPath[i].path;
 
+				Audios[name] = document.createElement("audio");
+				Audios[name].src = path;
+
+
+				Audios[name].addEventListener("canplaythrough",function() 
+				{
+					audioLoaded++;
+				}, false);
+			}
 			var ball = new Ball();
 			this.ball = ball;
 			this.GameObjects.push(Scenes["Loader"].track,ball);
