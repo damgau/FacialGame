@@ -335,8 +335,10 @@ function Tracker()
 			        if(rect != undefined){
 			        	box.x = rect.x*scaleFactor;
 				        box.y = rect.y*scaleFactor;
-				        box.w = rect.width*scaleFactor;
-				        box.h = rect.height*scaleFactor;  	
+				        box.w = rect.width*scaleFactor+30;
+				        // box.h = rect.height*scaleFactor; 
+				       // box.w = 200;
+				        box.h = 10;   	
 			        }
 
 			        that.Transform.RelativePosition.x = box.x;
@@ -436,7 +438,7 @@ function Tracker()
 
 					var newVelX = centerX - xInCollision;
 					// change 10 to up the deplacement
-					go.velocity.x = newVelX/10;
+					go.velocity.x = newVelX/5;
         			go.impulsion = go.impulsionMax;
         		}
         		else this.isCollide = false;
