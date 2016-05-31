@@ -124,7 +124,6 @@ errBack = function(error)
 	// Put video listeners into place
 	if(navigator.getUserMedia) 
     { // Standard
-    	console.log(video);
 		navigator.getUserMedia(videoObj, function(stream)
         {
 			video.src = stream;
@@ -146,8 +145,4 @@ errBack = function(error)
 			video.play();
 		}, errBack);
 	}
-
-
-
-
 Run();

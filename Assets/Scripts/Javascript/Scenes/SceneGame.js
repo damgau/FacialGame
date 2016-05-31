@@ -105,8 +105,13 @@ function SceneGame()
 			/*ctx.fillStyle = "black";
 			ctx.font = "15px candara";
 			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
+
+			console.log(Scenes['Loader'].highScore);
+			if(this.score > Scenes['Loader'].highScore){
+				Scenes['Loader'].highScore = this.score;
+			}
 			divScore.innerHTML = this.score;
-			divHighScore.innerHTML = this.score;
+			divHighScore.innerHTML = Scenes['Loader'].highScore;
 		} 
 		else 
 		{
