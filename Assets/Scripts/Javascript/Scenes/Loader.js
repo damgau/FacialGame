@@ -24,6 +24,7 @@ function Loader()
 
 	// test 
 	this.track;
+	this.highScore = 0;
 	
 	/**
 	 * Called at the instruction new Scene().
