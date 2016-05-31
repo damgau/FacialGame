@@ -330,7 +330,7 @@ function Tracker()
 
 
 			var box = new Box();
-			var scaleFactor = 4;
+			var scaleFactor = 2;
 			this.tracker.setInitialScale(3);
 		    this.tracker.setStepSize(1);
 		    this.tracker.setEdgesDensity(0.2);
