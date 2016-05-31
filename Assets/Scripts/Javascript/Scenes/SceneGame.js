@@ -52,6 +52,8 @@ function SceneGame()
 			var ball = new Ball();
 			this.ball = ball;
 			this.GameObjects.push(Scenes["Loader"].track,ball);
+
+			this.Groups.push(new ParticlesSystem(new Vector(0, 0)));
 			this.started = true;
 			Print('System:Scene ' + this.name + " Started !");
 			Time.SetTimeWhenSceneLoaded();

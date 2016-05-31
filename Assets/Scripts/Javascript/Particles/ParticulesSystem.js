@@ -67,6 +67,18 @@ function ParticlesSystem(_position)
 			// operation start
 			// add Emitter
 			//add Fiels
+			//	_position, _velocity, _spread, _rate, _max, _color
+			this.AddElement(new Emitter(new Vector(canvas.width/2,80),
+							new Vector(0, 5),
+							null,
+							40,
+							200,
+							null));
+			// _position, _mass
+			var posX = Scenes["Loader"].track.Transform.RelativePosition.x 
+						+ Scenes["Loader"].track.Transform.Size.x/2;
+			var posY = Scenes["Loader"].track.Transform.RelativePosition.y;
+			this.AddElement(new Field(new Vector(posX, posY), -10));
 			this.started = true;
 			Print('System: Particle System ' + this.name + " Started !");
 		}
@@ -94,6 +106,13 @@ function ParticlesSystem(_position)
 				this.Transform.Scale.x = this.Transform.RelativeScale.x;
 				this.Transform.Scale.y = this.Transform.RelativeScale.y;
 			}
+
+			// _position, _mass
+			var posX = Scenes["Loader"].track.Transform.RelativePosition.x 
+						+ Scenes["Loader"].track.Transform.Size.x/2;
+			var posY = Scenes["Loader"].track.Transform.RelativePosition.y;
+			this.Fields[0].Position.x = posX;
+			this.Fields[0].Position.y = posY;
 
 			for (var emitter in this.Emitters) 
 			{
