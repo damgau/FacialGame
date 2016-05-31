@@ -53,8 +53,7 @@ function Loader()
 			Scenes["ScenePathFinding"]  = new ScenePathFinding();
 			Scenes["SceneSave"]  = new SceneSave();
 			Scenes["SceneIA"]  = new SceneIA();	*/
-			Scenes["Game"]  = new SceneGame();	
-
+			Scenes["Game"]  = new SceneGame();
 			LoadImages();
 			this.started = true;
 			Print('System:Scene ' + this.name + " Started !");
