@@ -334,7 +334,7 @@ function Ball()
 			this.Renderer.Material.Source = Images["ball"];
 			this.SetSize(this.radius*2,this.radius*2);
 			// operation start
-			this.SetPosition(canvas.width/2,canvas.height/2);
+			this.SetPosition(canvas.width/2,80);
 			this.SetPivot(0.5,0.5);
 			this.Physics.colliderIsSameSizeAsTransform  = true;
 
@@ -413,12 +413,12 @@ function Ball()
 
 		if(this.Transform.RelativePosition.y > canvas.height - this.radius)
 		{
-			this.impulsion = this.impulsionMax;
-			Application.LoadedScene.score = 0;
+			//this.impulsion = this.impulsionMax;
+			//Application.LoadedScene.score = 0;
+			Application.LoadedScene = Scenes["GameOver"];
 		}
 
 		if (this.Transform.RelativePosition.x < 0){
-			//console.log("hre")
 			this.velocity.x = -this.velocity.x;
 		}
 		if (this.Transform.RelativePosition.x > canvas.width) this.velocity.x = -this.velocity.x;

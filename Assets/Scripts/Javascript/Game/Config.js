@@ -17,6 +17,7 @@ var canvas = document.getElementById('canvas');
 var divScore = document.getElementById('score');
 var ctx = canvas.getContext("2d");
 
+
 var Scenes = {};
 var Gravity = new Vector();
 Gravity.y = -9.81;
@@ -26,7 +27,8 @@ var Application =
 {
 	LoadedScene: null,
 	gamePaused: false,
-	debugMode: false
+	debugMode: true
+	
 };
 
 var imagesLoaded = 0;

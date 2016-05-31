@@ -26,20 +26,18 @@
  *
  *
  * */
-function Tracker() 
+function StaticBall() 
 {
-	this.name = "Tracker";
+	this.name = "StaticBall";
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
 	this.fixedToCamera = true;
 
 	this.MouseOffset = new Vector();
-	this.isCollide = false;
+
 	this.Parent = null;
 
-	this.tracker = new tracking.ObjectTracker('face');
-	
 	this.Transform = {};
 	this.Transform.RelativePosition = new Vector();
 	this.Transform.Position = new Vector();
@@ -48,6 +46,10 @@ function Tracker()
 	this.Transform.Scale = new Vector(1,1);
 	this.Transform.Pivot = new Vector(0,0);
 	this.Transform.angle = 0;
+
+
+	/*CUSTOM*/
+	this.radius = 20;
 
 	/**
 	 * @function SetPosition
@@ -177,7 +179,7 @@ function Tracker()
 	this.Physics.colliderIsSameSizeAsTransform = false;
 	this.Physics.countHovered = 0;
 
-	this.Physics.Collider = new Box(0,0,0,0);
+	this.Physics.Collider = new Circle();
 
 	this.Renderer = 
 	{
@@ -261,6 +263,8 @@ function Tracker()
 			}
 			ctx.restore();
 		}
+					
+
 	};
 
 	/**
@@ -320,44 +324,17 @@ function Tracker()
 	this.Start = function() 
 	{
 		if (!this.started) {
+			this.Renderer.Material.Source = Images["ball"];
+			this.SetSize(this.radius*2,this.radius*2);
 			// operation start
+			this.SetPosition(canvas.width/2, 80);
+			this.SetPivot(0.5,0.5);
+			this.Physics.colliderIsSameSizeAsTransform  = true;
 
-			var box = new Box();
-			this.tracker.setInitialScale(1);
-		    this.tracker.setStepSize(1);
-		    this.tracker.setEdgesDensity(0.1);
-			tracking.track('#video', this.tracker, { camera: true });
-			var that = this;
-			this.tracker.on('track', function(event) {
-		     	ctx.clearRect(0, 0, canvas.width, canvas.height);
-		     	event.data.forEach(function(rect) {
-			        ctx.strokeStyle = '#a64ceb';
-			        ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
-
-			        if(rect != undefined){
-			        	box.x = rect.x;
-				        box.y = rect.y;
-				        box.w = rect.width;
-				        box.h = rect.height;  	
-			        }
-
-			        that.Transform.RelativePosition.x = box.x;
-			        that.Transform.RelativePosition.y = box.y;
-			        that.Transform.Size.x = box.w;
-			        that.Transform.Size.y = box.h;
-
-			        that.Physics.Collider = box;
-
-			        ctx.font = '11px Helvetica';
-			        ctx.fillStyle = "#fff";
-			        ctx.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-			        ctx.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-		     	});
-		    });
 
 			if (this.Physics.colliderIsSameSizeAsTransform) 
 			{
-				this.Physics.Collider = this.Transform;
+				this.Physics.Collider = new Circle(this.Transform.RelativePosition.x, this.Transform.RelativePosition.y, this.radius);
 			}
 
 			this.started = true;
@@ -420,32 +397,10 @@ function Tracker()
 	 * */
 	this.Update = function() 
 	{
+		
+		Scenes["Game"].score = 0;
 
-        //collision
-        for (var i = 0; i < Application.LoadedScene.GameObjects.length; i++) {
-        	var go = Application.LoadedScene.GameObjects[i];
-
-        	if(go.name != 'Tracker'){
-        		var collision = Physics.CheckCollision(this.Physics.Collider, go.Physics.Collider);
-        		if (collision && go.name == "StaticBall") {
-        			console.log("ball game over touch");
-        			Scenes["Game"] = new SceneGame();
-        			Application.LoadedScene = Scenes["Game"];
-        		}
-        		if(collision){
-        			if (this.isCollide == false) {
-        				Application.LoadedScene.score ++;
-        				this.isCollide = true;
-        			}
-
-        			go.impulsion = go.impulsionMax;
-        		}
-        		else this.isCollide = false;
-        	}
-        }
-
-        // si il y a une collision avec staticBall : switch game, score = 0 + emitterParticule (feu d'artifice) sur game scene
-
+		this.Renderer.Draw();
 		this.PostUpdate();	
 	};
 	/**
