@@ -29,7 +29,7 @@ function SceneGameOver()
 	 * */
 	this.Awake = function() 
 	{
-		console.clear();
+		//console.clear();
 		Print('System:Scene ' + this.name + " Created !");
 	}
 	
@@ -44,7 +44,12 @@ function SceneGameOver()
 			Time.SetTimeWhenSceneBegin();
 			// operation start
 			//var track = new Tracker();
-			var staticBall = new StaticBall();
+			//var staticBall = new StaticBall();
+			var staticBall = new Ball();
+			staticBall.velocity = new Vector(0, 0);
+			staticBall.impulsion = 0;
+			staticBall.impulsionMax = 0;
+
 			this.GameObjects.push(Scenes["Loader"].track, staticBall);
 
 			this.started = true;

@@ -321,8 +321,6 @@ function Tracker()
 	{
 		if (!this.started) {
 			// operation start
-
-
 			var box = new Box();
 			var scaleFactor = 2;
 			this.tracker.setInitialScale(3);
@@ -333,6 +331,7 @@ function Tracker()
 			this.tracker.on('track', function(event) {
 		     	ctx.clearRect(0, 0, canvas.width, canvas.height);
 		     	event.data.forEach(function(rect) {
+
 			        if(rect != undefined){
 			        	box.x = rect.x*scaleFactor;
 				        box.y = rect.y*scaleFactor;
@@ -421,17 +420,23 @@ function Tracker()
 
         	if(go.name != 'Tracker'){
         		var collision = Physics.CheckCollision(this.Physics.Collider, go.Physics.Collider);
-        		if (collision && go.name == "StaticBall") {
-        			console.log("ball game over touch");
+        		if (collision && Application.LoadedScene == Scenes["GameOver"]) {
         			Scenes["Game"] = new SceneGame();
         			Application.LoadedScene = Scenes["Game"];
         		}
-        		if(collision){
+        		if(collision && Application.LoadedScene == Scenes["Game"]){
         			if (this.isCollide == false) {
         				Application.LoadedScene.score ++;
         				this.isCollide = true;
         			}
+        			//this.Transform.RelativePosition.x
+					//this.Transform.Size.x
+					var centerX = this.Transform.RelativePosition.x + this.Transform.Size.x/2;
+					var xInCollision = go.Transform.RelativePosition.x + go.Transform.Size.x/2;
 
+					var newVelX = centerX - xInCollision;
+					// change 10 to up the deplacement
+					go.velocity.x = newVelX/10;
         			go.impulsion = go.impulsionMax;
         		}
         		else this.isCollide = false;

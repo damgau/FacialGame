@@ -38,7 +38,7 @@ function Ball()
 
 	this.Parent = null;
 
-	this.velocity = {};
+	this.velocity = new Vector();
 	this.velocity.x = 2;
 	this.velocity.y = Gravity.y;
 
@@ -405,7 +405,6 @@ function Ball()
 	this.Update = function() 
 	{
 		this.Transform.RelativePosition.x -= this.velocity.x;
-		//console.log(this.velocity.x);
 		this.Transform.RelativePosition.y -= this.velocity.y + this.impulsion;
 		this.Physics.Collider.y = this.Transform.RelativePosition.y;
 		this.Physics.Collider.x = this.Transform.RelativePosition.x;
@@ -415,6 +414,7 @@ function Ball()
 		{
 			//this.impulsion = this.impulsionMax;
 			//Application.LoadedScene.score = 0;
+			Scenes["GameOver"] = new SceneGameOver();
 			Application.LoadedScene = Scenes["GameOver"];
 		}
 
