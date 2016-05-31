@@ -92,7 +92,8 @@ function SceneGame()
 			/*ctx.fillStyle = "black";
 			ctx.font = "15px candara";
 			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
-			score.innerHTML = "Score : " + this.score;
+			divScore.innerHTML = this.score;
+			divHighScore.innerHTML = this.score;
 		} 
 		else 
 		{

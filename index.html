@@ -11,19 +11,72 @@
 	<script src="Assets/Scripts/Javascript/Tools/Vendor/face.js"></script>
 	<script src="Assets/Scripts/Javascript/Tools/Vendor/dat.gui.min.js"></script>
 	<style>
-	  video, canvas {
-	  	-moz-transform : rotateY(180deg);
-	  	transform : rotateY(180deg);
-	  	border-radius: 15px;
-	  	border: 1px solid black;
-	  }
-/* 	  video{
-	visibility: hidden;
-} */
-	  #score {
-	  	position : relative;
-	  	z-index : 1;
-	  }
+@font-face {
+font-family: 'display24';
+src: url('Assets/Graphics/Open_24_Display.ttf');
+}
+video, canvas {
+-moz-transform : rotateY(180deg);
+transform : rotateY(180deg);
+border-radius: 15px;
+border: 1px solid black;
+}
+#score-wrapper {
+font-family: 'display24';
+position: relative;
+z-index: 1;
+display: block;
+width: 600px;
+background-color: #333;
+color: white;
+padding: 10px;
+}
+#score-wrapper div{
+display: inline-block;
+width: 45%;
+height: 80px;
+font-size: 20px;
+}
+#score-wrapper span{
+display: block;
+font-size: 30px;
+}
+.score-header{
+  -webkit-animation: neonHeader 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonHeader 1.5s ease-in-out infinite alternate;
+  animation: neonHeader 1.5s ease-in-out infinite alternate;
+}
+@-webkit-keyframes neonHeader {
+  from {text-shadow: 0 0 10px #f00, 0 0 20px #f00, 0 0 30px #f00, 0 0 40px #f00, 0 0 70px #f00, 0 0 80px #f00, 0 0 100px #f00, 0 0 150px #f00;}
+  to {text-shadow: 0 0 5px #f00, 0 0 10px #f00, 0 0 15px #f00, 0 0 20px #f00, 0 0 35px #f00, 0 0 40px #f00, 0 0 50px #f00, 0 0 75px #f00;}
+}@-moz-keyframes neonHeader {
+  from {text-shadow: 0 0 10px #f00, 0 0 20px #f00, 0 0 30px #f00, 0 0 40px #f00, 0 0 70px #f00, 0 0 80px #f00, 0 0 100px #f00, 0 0 150px #f00;}
+  to {text-shadow: 0 0 5px #f00, 0 0 10px #f00, 0 0 15px #f00, 0 0 20px #f00, 0 0 35px #f00, 0 0 40px #f00, 0 0 50px #f00, 0 0 75px #f00;}
+}
+@keyframes neonHeader {
+  from {text-shadow: 0 0 10px #f00, 0 0 20px #f00, 0 0 30px #f00, 0 0 40px #f00, 0 0 70px #f00, 0 0 80px #f00, 0 0 100px #f00, 0 0 150px #f00;}
+  to {text-shadow: 0 0 5px #f00, 0 0 10px #f00, 0 0 15px #f00, 0 0 20px #f00, 0 0 35px #f00, 0 0 40px #f00, 0 0 50px #f00, 0 0 75px #f00;}
+}
+
+.score-text{
+  -webkit-animation: neonText 1.5s ease-in-out infinite alternate;
+  -moz-animation: neonText 1.5s ease-in-out infinite alternate;
+  animation: neonText 1.5s ease-in-out infinite alternate;
+}
+@-webkit-keyframes neonText {
+  from {text-shadow: 0 0 10px #ff0, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 70px #ff0, 0 0 80px #ff0, 0 0 100px #ff0, 0 0 150px #ff0;}
+  to {text-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 15px #ff0, 0 0 20px #ff0, 0 0 35px #ff0, 0 0 40px #ff0, 0 0 50px #ff0, 0 0 75px #ff0;}
+}
+@-moz-keyframes neonText {
+  from {text-shadow: 0 0 10px #ff0, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 70px #ff0, 0 0 80px #ff0, 0 0 100px #ff0, 0 0 150px #ff0;}
+  to {text-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 15px #ff0, 0 0 20px #ff0, 0 0 35px #ff0, 0 0 40px #ff0, 0 0 50px #ff0, 0 0 75px #ff0;}
+}
+@keyframes neonText {
+  from {text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;}
+  to {text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 35px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 75px #fff;}
+}
+
+
 	</style>
 </head>
 <body>
@@ -32,7 +85,16 @@
 		<canvas id="canvas" >
 			Votre navigateur ne supporte pas le canvas dommage...
 		</canvas>
-		<div id="score"></div>
+		<div id="score-wrapper">
+			<div id="highscore-wrapper">
+				<span class="score-header">highscore</span>
+				<span class="score-text" id="highscore"></span>
+			</div>
+			<div id="currentscore-wrapper">
+				<span class="score-header">score</span>
+				<span class="score-text" id="score"></span>
+			</div>
+		</div>
 	</center>
 
 	<!-- Tools  -->

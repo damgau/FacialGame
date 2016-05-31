@@ -14,8 +14,11 @@
 
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
-var divScore = document.getElementById('score');
 var ctx = canvas.getContext("2d");
+
+/* DIPLAY SCORE IN HTML*/
+var divHighScore = document.getElementById('highscore');
+var divScore = document.getElementById('score');
 
 
 var Scenes = {};
