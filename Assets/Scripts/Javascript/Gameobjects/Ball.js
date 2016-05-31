@@ -43,7 +43,7 @@ function Ball()
 	this.velocity.y = Gravity.y;
 
 	this.impulsion = 0;
-	this.impulsionMax = 20;
+	this.impulsionMax = 23;
 
 	this.Transform = {};
 	this.Transform.RelativePosition = new Vector();
@@ -336,12 +336,16 @@ function Ball()
 			// operation start
 			this.SetPosition(canvas.width/2,80);
 			this.SetPivot(0.5,0.5);
+			this.SetScale(2, 2);
+
 			this.Physics.colliderIsSameSizeAsTransform  = true;
 
 
 			if (this.Physics.colliderIsSameSizeAsTransform) 
 			{
-				this.Physics.Collider = new Circle(this.Transform.RelativePosition.x, this.Transform.RelativePosition.y, this.radius);
+				this.Physics.Collider = new Circle(this.Transform.RelativePosition.x,
+													 this.Transform.RelativePosition.y,
+													 this.radius);
 			}
 
 			this.started = true;
@@ -406,8 +410,9 @@ function Ball()
 	{
 		this.Transform.RelativePosition.x -= this.velocity.x;
 		this.Transform.RelativePosition.y -= this.velocity.y + this.impulsion;
-		this.Physics.Collider.y = this.Transform.RelativePosition.y;
-		this.Physics.Collider.x = this.Transform.RelativePosition.x;
+		this.Physics.Collider.y = this.Transform.RelativePosition.y + 40;
+		this.Physics.Collider.x = this.Transform.RelativePosition.x + 40;
+		this.Physics.Collider.radius = 25;
 
 
 		if(this.Transform.RelativePosition.y > canvas.height - this.radius)
