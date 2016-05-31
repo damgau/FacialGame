@@ -40,7 +40,7 @@ Field.prototype.Update = function()
 		this.Position.x = this.RelativePosition.x + this.Parent.Transform.Position.x;
 		this.Position.y = this.RelativePosition.y + this.Parent.Transform.Position.y;
 	}
-	this.Render();
+	// this.Render();
 }
 
 /**
