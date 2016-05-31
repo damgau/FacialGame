@@ -107,7 +107,12 @@ video.width = 320;
 video.height = 240;
 canvas.style.position = video.style.position = "absolute";
 canvas.style.position = video.style.zIndex = 0;
-canvas.style.left = video.style.left = (window.innerWidth * 0.5 - canvas.width * 0.5) + "px";
-canvas.style.top = video.style.top = (window.innerHeight * 0.5 - canvas.height * 0.5) + "px";
+/*canvas.style.left = video.style.left = (window.innerWidth * 0.5 - canvas.width * 0.5) + "px";
+canvas.style.top = video.style.top = (window.innerHeight * 0.5 - canvas.height * 0.5) + "px";*/
 
+canvas.style.left =  '800px';
+canvas.style.top =  '100px';
+
+video.style.left = '100px';
+video.style.top = '100px';
 Run();

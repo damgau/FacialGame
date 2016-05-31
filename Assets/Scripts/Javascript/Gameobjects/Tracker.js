@@ -323,9 +323,9 @@ function Tracker()
 			// operation start
 
 			var box = new Box();
-			this.tracker.setInitialScale(1);
+			this.tracker.setInitialScale(3);
 		    this.tracker.setStepSize(1);
-		    this.tracker.setEdgesDensity(0.1);
+		    this.tracker.setEdgesDensity(0.2);
 			tracking.track('#video', this.tracker, { camera: true });
 			var that = this;
 			this.tracker.on('track', function(event) {
