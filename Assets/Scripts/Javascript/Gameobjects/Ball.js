@@ -419,6 +419,14 @@ function Ball()
 		{
 			//this.impulsion = this.impulsionMax;
 			//Application.LoadedScene.score = 0;
+			Audios["ouh"].volume = 1;
+			Audios["ouh"].currentTime = 0;
+			Audios["ouh"].play();
+			//console.log(Scenes['Loader'].highScore);
+			if(Scenes['Game'].score > Scenes['Loader'].highScore){
+				Scenes['Loader'].highScore = Scenes['Game'].score;
+				
+			}
 			Scenes["GameOver"] = new SceneGameOver();
 			Application.LoadedScene = Scenes["GameOver"];
 		}

@@ -78,9 +78,9 @@ var ImagesPath =
 	{ name:"ball",path: "ballTechno.png"}
 ];
 var Images = {};
-var soundLoaded = 0;
-var SoundsPath = [
-	{name:"ola",path: "ballTechno.png"},
-	{name:"ouh",path: "ballTechno.png"}
+var audioLoaded = 0;
+var AudiosPath = [
+	{name:"ola",path: "SF-ole.mp3"},
+	{name:"ouh",path: "Huee01.mp3"}
 ];
-var Sounds = {};
+var Audios = {};

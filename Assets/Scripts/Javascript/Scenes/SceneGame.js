@@ -23,7 +23,7 @@ function SceneGame()
 	this.started = false;
 
 	this.score = 0;
-
+	this.SoundPlaying = false;
 	this.WorldSize = new Vector(4096,4096);
 
 	/**
@@ -48,10 +48,10 @@ function SceneGame()
 
 			// create in Loader
 			// var track = new Tracker();
-			for (var i = 0; i < AudioPath.length; i++) 
+			for (var i = 0; i < AudiosPath.length; i++) 
 			{	
-				var name = AudioPath[i].name
-				var path = "Assets/Audio/" + AudioPath[i].path;
+				var name = AudiosPath[i].name
+				var path = "Assets/Audio/" + AudiosPath[i].path;
 
 				Audios[name] = document.createElement("audio");
 				Audios[name].src = path;
@@ -60,6 +60,7 @@ function SceneGame()
 				Audios[name].addEventListener("canplaythrough",function() 
 				{
 					audioLoaded++;
+					
 				}, false);
 			}
 			var ball = new Ball();
@@ -79,6 +80,17 @@ function SceneGame()
 	{
 		if (!Application.GamePaused) 
 		{
+			if(Scenes['Game'].score == Scenes['Loader'].highScore+1 && !this.SoundPlaying){
+				this.SoundPlaying = true;
+				Audios["ola"].volume = 1;
+				Audios["ola"].currentTime = 0;
+				Audios["ola"].play();
+				console.log("ola");
+			}
+			if(Scenes['Game'].score != Scenes['Loader'].highScore+1){
+				this.SoundPlaying = false;
+			}
+
 			for (var i = 0; i < this.GameObjects.length; i++) 
 			{
 				this.GameObjects[i].Start();
@@ -106,10 +118,7 @@ function SceneGame()
 			ctx.font = "15px candara";
 			ctx.fillText("Score : " + this.score,10,canvas.height-20);*/
 
-			console.log(Scenes['Loader'].highScore);
-			if(this.score > Scenes['Loader'].highScore){
-				Scenes['Loader'].highScore = this.score;
-			}
+			
 			divScore.innerHTML = this.score;
 			divHighScore.innerHTML = Scenes['Loader'].highScore;
 		} 
