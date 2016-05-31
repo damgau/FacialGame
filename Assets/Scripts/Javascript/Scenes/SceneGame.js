@@ -31,7 +31,7 @@ function SceneGame()
 	 * */
 	this.Awake = function() 
 	{
-		console.clear();
+		//console.clear();
 		Print('System:Scene ' + this.name + " Created !");
 	}
 	

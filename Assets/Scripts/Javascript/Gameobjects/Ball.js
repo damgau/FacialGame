@@ -38,7 +38,7 @@ function Ball()
 
 	this.Parent = null;
 
-	this.velocity = {};
+	this.velocity = new Vector();
 	this.velocity.x = 2;
 	this.velocity.y = Gravity.y;
 
@@ -415,6 +415,7 @@ function Ball()
 		{
 			//this.impulsion = this.impulsionMax;
 			//Application.LoadedScene.score = 0;
+			Scenes["GameOver"] = new SceneGameOver();
 			Application.LoadedScene = Scenes["GameOver"];
 		}
 
@@ -424,6 +425,7 @@ function Ball()
 		if (this.Transform.RelativePosition.x > canvas.width) this.velocity.x = -this.velocity.x;
 
 		this.impulsion = this.impulsion + (this.velocity.y * Time.deltaTime);
+		//console.log(this.impulsion);
 
 		this.Renderer.Draw();
 		// ctx.beginPath();

@@ -322,13 +322,6 @@ function Tracker()
 		if (!this.started) {
 			// operation start
 
-
-
-
-
-
-
-
 			var box = new Box();
 			var scaleFactor = 2;
 			this.tracker.setInitialScale(3);
@@ -339,8 +332,6 @@ function Tracker()
 			this.tracker.on('track', function(event) {
 		     	ctx.clearRect(0, 0, canvas.width, canvas.height);
 		     	event.data.forEach(function(rect) {
-			        //ctx.strokeStyle = '#a64ceb';
-			        //ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
 
 			        if(rect != undefined){
 			        	box.x = rect.x*scaleFactor;
@@ -355,13 +346,6 @@ function Tracker()
 			        that.Transform.Size.y = box.h;
 
 			        that.Physics.Collider = box;
-
-
-
-			        //ctx.font = '11px Helvetica';
-			        //ctx.fillStyle = "#fff";
-			        //ctx.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-			        //ctx.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 		     	});
 		    });
 
@@ -437,17 +421,26 @@ function Tracker()
 
         	if(go.name != 'Tracker'){
         		var collision = Physics.CheckCollision(this.Physics.Collider, go.Physics.Collider);
-        		if (collision && go.name == "StaticBall") {
-        			console.log("ball game over touch");
+        		if (collision && Application.LoadedScene == Scenes["GameOver"]) {
+        			console.log("here");
         			Scenes["Game"] = new SceneGame();
         			Application.LoadedScene = Scenes["Game"];
+        			console.log(Application.LoadedScene)
         		}
-        		if(collision){
+        		if(collision && Application.LoadedScene == Scenes["Game"]){
+        			console.log("PROUT")
         			if (this.isCollide == false) {
         				Application.LoadedScene.score ++;
         				this.isCollide = true;
         			}
+        			//this.Transform.RelativePosition.x
+					//this.Transform.Size.x
+					var centerX = this.Transform.RelativePosition.x + this.Transform.Size.x/2;
+					var xInCollision = go.Transform.RelativePosition.x + go.Transform.Size.x/2;
 
+					var newVelX = centerX - xInCollision;
+					console.log(newVelX);
+					go.velocity.x = newVelX/10;
         			go.impulsion = go.impulsionMax;
         		}
         		else this.isCollide = false;
