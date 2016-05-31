@@ -101,17 +101,12 @@ function ImageLoaded(_imageLoaded)
  * set window innerHeight to canvas height
  * 
  * */
-canvas.width = 320*2;
-canvas.height = 240*2;
-video.width = 320;
-video.height = 240;
+canvas.width 	= 320*2;
+canvas.height 	= 240*2;
+video.width 	= 320;
+video.height 	= 240;
 canvas.style.position = video.style.position = "absolute";
 canvas.style.position = video.style.zIndex = 0;
-/*canvas.style.left = video.style.left = (window.innerWidth * 0.5 - canvas.width * 0.5) + "px";
-canvas.style.top = video.style.top = (window.innerHeight * 0.5 - canvas.height * 0.5) + "px";*/
-
-/*canvas.style.left =  '800px';
-canvas.style.top =  '100px';*/
 
 canvas.style.left =  (window.innerWidth * 0.5 - canvas.width * 0.5) + "px";
 canvas.style.top =  (window.innerHeight * 0.5 - canvas.height * 0.5) + "px";
@@ -129,11 +124,9 @@ errBack = function(error)
 	// Put video listeners into place
 	if(navigator.getUserMedia) 
     { // Standard
-    	console.log('yes');
     	console.log(video);
 		navigator.getUserMedia(videoObj, function(stream)
         {
-        	console.log('normal');
 			video.src = stream;
 			video.play();
 		}, errBack);
@@ -141,7 +134,6 @@ errBack = function(error)
     { // WebKit-prefixed
 		navigator.webkitGetUserMedia(videoObj, function(stream)
         {
-        	console.log('webkit');
 			video.src = window.webkitURL.createObjectURL(stream);
 			video.play();
 		}, errBack);
@@ -150,7 +142,6 @@ errBack = function(error)
      { // Firefox-prefixed
 		navigator.mozGetUserMedia(videoObj, function(stream)
         {
-        	console.log('moz');
 			video.src = window.URL.createObjectURL(stream);
 			video.play();
 		}, errBack);
