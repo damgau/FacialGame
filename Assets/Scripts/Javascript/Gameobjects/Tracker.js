@@ -422,13 +422,10 @@ function Tracker()
         	if(go.name != 'Tracker'){
         		var collision = Physics.CheckCollision(this.Physics.Collider, go.Physics.Collider);
         		if (collision && Application.LoadedScene == Scenes["GameOver"]) {
-        			console.log("here");
         			Scenes["Game"] = new SceneGame();
         			Application.LoadedScene = Scenes["Game"];
-        			console.log(Application.LoadedScene)
         		}
         		if(collision && Application.LoadedScene == Scenes["Game"]){
-        			console.log("PROUT")
         			if (this.isCollide == false) {
         				Application.LoadedScene.score ++;
         				this.isCollide = true;
@@ -439,7 +436,7 @@ function Tracker()
 					var xInCollision = go.Transform.RelativePosition.x + go.Transform.Size.x/2;
 
 					var newVelX = centerX - xInCollision;
-					console.log(newVelX);
+					// change 10 to up the deplacement
 					go.velocity.x = newVelX/10;
         			go.impulsion = go.impulsionMax;
         		}

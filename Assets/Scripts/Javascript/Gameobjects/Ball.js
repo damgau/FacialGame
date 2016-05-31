@@ -405,7 +405,6 @@ function Ball()
 	this.Update = function() 
 	{
 		this.Transform.RelativePosition.x -= this.velocity.x;
-		//console.log(this.velocity.x);
 		this.Transform.RelativePosition.y -= this.velocity.y + this.impulsion;
 		this.Physics.Collider.y = this.Transform.RelativePosition.y;
 		this.Physics.Collider.x = this.Transform.RelativePosition.x;
@@ -425,7 +424,6 @@ function Ball()
 		if (this.Transform.RelativePosition.x > canvas.width) this.velocity.x = -this.velocity.x;
 
 		this.impulsion = this.impulsion + (this.velocity.y * Time.deltaTime);
-		//console.log(this.impulsion);
 
 		this.Renderer.Draw();
 		// ctx.beginPath();
