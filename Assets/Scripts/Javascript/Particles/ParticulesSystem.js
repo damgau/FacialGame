@@ -68,10 +68,25 @@ function ParticlesSystem(_position)
 			// add Emitter
 			//add Fiels
 			//	_position, _velocity, _spread, _rate, _max, _color
-			this.AddElement(new Emitter(new Vector(canvas.width/2,80),
+			var random1 = Math.Random.RangeInt(canvas.width/2 - 200, canvas.width/2 + 200, true);
+			this.AddElement(new Emitter(new Vector(random1,80),
+							new Vector(0, 2),
+							null,
+							10,
+							200,
+							null));
+			var random2 = Math.Random.RangeInt(20, 280, true);
+			this.AddElement(new Emitter(new Vector(random2,160),
 							new Vector(0, 5),
 							null,
 							40,
+							250,
+							null));
+			var random3 = Math.Random.RangeInt(400, 600, true);
+			this.AddElement(new Emitter(new Vector(random3,250),
+							new Vector(0, 7),
+							null,
+							20,
 							200,
 							null));
 			// _position, _mass
